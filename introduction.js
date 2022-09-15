@@ -1,0 +1,1 @@
+// Write a function that calculates the sum of all nums from 1 to n
