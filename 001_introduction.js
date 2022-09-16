@@ -1,13 +1,13 @@
 ////////////////////////
-//  Timing our code:
-//  Not very efficient because results vary, but can return the general trend
+//  Timing our code:  Not very efficient because results vary, but can return the general trend
+//  EX: Write a function that calculates the sum of all nums from 1 to n
 ////////////////////////
 
-// EX: Write a function that calculates the sum of all nums from 1 to n
+// Linear - O(n)
 const sumn1 = (n) => {
     let res = 0
     for (let i = 1; i <= n; i++) {
-        res += i
+        res += i // Looop runs 2 operations each run up to n...
     }
     return res
 }
@@ -15,8 +15,9 @@ let t1 = performance.now()
 console.log(sumn1(5))
 let t2 = performance.now()
 
+// Constant - O(1)
 const sumn2 = (n) => {
-    return n * (n + 1) / 2
+    return n * (n + 1) / 2 // 3 operations total regardless if n
 }
 let t3 = performance.now()
 console.log(sumn2(5))
