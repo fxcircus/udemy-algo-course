@@ -40,18 +40,18 @@ const charCountFirstRun = (str) => {
 
 console.log(charCountFirstRun(null))
 console.log(charCountFirstRun("Roy"))
+
 /////////////////////////////////////////////////////////////
 // 5. Refactor
-
 const charCount = (str) => {
     res = {} 
     if (str !== "" && str !== null) {
         s = str.toLowerCase()
-        for(let i = 0; i < s.length; i++) {
-            char = s[i]
+        // For of instead of "regular" for
+        for(const char of s) {
             // Using regex to check if char matches abc OR numbers,
             // and ternary operator to only append these to the res object
-            char.match(/[a-z]|[1-9]/) ? res[char] = (res[char] || 0) + 1 : null
+            char.match(/[a-z0-9]/) ? res[char] = (res[char] || 0) + 1 : null
         }
     }
     return res
