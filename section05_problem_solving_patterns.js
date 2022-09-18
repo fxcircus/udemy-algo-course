@@ -187,9 +187,11 @@ console.log("\ncountUniqueValues:\n")
 /////////////////////////////////////////////////////////////
 // 3. Break it down (pseudocode):
 // IF arr len is 0 ==> return 0
-// ELSE init 2 pointers for last idx and last -1 AND res array
-// Iterate over array, if arr elements are not equal and num is not in res than push to res
-// return length of res array
+// ELSE init 2 pointers p1 and p2
+// Iterate over array, if arr elements are not equal - 
+// Increment p1, assign value from arr[p2] to arr[p1]
+// Increment p2 in order to keep moving up the array
+// return p1 + 1 because arrays in js are 0 based
 
 /////////////////////////////////////////////////////////////
 // 4. Solve or simplify if not able to produce full solution:
@@ -199,21 +201,17 @@ const countUniqueValues = (arr) => {
     } else if (arr.length === 1 ) {
         return 1
     } else {
-        res = []
-        let l1 = arr.length - 1
-        let l2 = l1 - 1
-        while (l2 > -1) {
-            if (arr[l1] !== arr[l2]) {
-                res.push(arr[l1], arr[l2])
+        let p1 = 0
+        for (let p2 = 1; p2 < arr.length; p2++) {
+            if (arr[p1] !== arr[p2]) {
+                p1++
+                arr[p1] = arr[p2]
             }
-            l1--
-            l2--
         }
+        return p1 + 1
     }
-    return res
 }
 
-console.log(countUniqueValues([1, 1, 1, 1, 1, 2]))
-console.log(countUniqueValues([]))
-// console.log(countUniqueValues())
-// console.log(countUniqueValues())
+console.log(countUniqueValues([1, 1, 1, 1, 1, 2])) // 2
+console.log(countUniqueValues(([1,2,3,4,4,4,7,7,12,12,13]))) // 7
+console.log(countUniqueValues([])) // 0
