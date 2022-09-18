@@ -1,4 +1,8 @@
 /////////////////////////////////////////////////////////////
+// Ex.1: "same"
+/////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////
 // 1. Understand the problem:
 // The function takes in 2 arrays
 // and make sure that for each of the values in the first array, thre's also  a value in the 2nd array
@@ -25,7 +29,7 @@ compare the objects and return true / false
 */
 
 /////////////////////////////////////////////////////////////
-// 4. Solve or simplify if not able to produce full solution:
+// 4. Solve 
 const same = (arr1, arr2) => {
     // Check different lengths edge case:
     if (arr1.length !== arr2.length) {
@@ -52,4 +56,60 @@ const same = (arr1, arr2) => {
 console.log(same([3, 2], [4,9]))
 
 /////////////////////////////////////////////////////////////
-// 5. Refactor
+// Ex.2: "Anagrarms"
+/////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////
+// 1. Understand the problem:
+// Function takes in 2 strings. Returns true if the 2nd string is an anagram of the 1st string.
+// Otherwise, return false
+// Anagram = a new string formed by rearranging chars from an original string
+
+/////////////////////////////////////////////////////////////
+// 2. Explore examples:
+// ("cinema", "iceman") ==> true
+// ("I am Lord Voldemort", "Tom Marvolo Riddle") ==> true? do we need to account for spaces? how about nums \ special chars \ lowercase and uppercase?
+// ("", "") ==> true
+// ("apple", "lapel") ==> false 
+
+/////////////////////////////////////////////////////////////
+// 3. Break it down (pseudocode):
+/* 
+IF string length is different ==> return false
+ELSE use freq counter pattern to check freq of each char in 2 new objects
+Iterate over new obj and return false if we find 1 mismatch
+return true
+*/
+
+/////////////////////////////////////////////////////////////
+// 4. Solve 
+const validAnagram = (str1, str2) => {
+    // Edge case - making sure string have same lengh:
+    if (str1.length !== str2.length) {
+        return false
+    } else {
+        str1 = str1.toLowerCase()
+        str2 = str2.toLowerCase()
+        const freq1 = {}
+        const freq2 = {}
+        // Getting frequency of each char in the strings
+        for (const idx in str1) {
+            const char = str1[idx]
+            freq1[char] = (freq1[char] || 0) + 1
+        }
+        for (const idx in str2) {
+            const char = str2[idx]
+            freq2[char] = (freq2[char] || 0) + 1
+        }
+        // comparing
+        for(key in freq1) {
+            if((!(key in freq2)) || (freq1[key] !== freq2[key])) return false
+        }
+    }
+    return true
+}
+
+console.log(validAnagram("cinema", "iceman"))
+console.log(validAnagram("IamLordVoldemort", "TomMarvoloRiddle"))
+console.log(validAnagram("", ""))
+console.log(validAnagram("apple", "lapel"))
