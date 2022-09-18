@@ -26,6 +26,30 @@ compare the objects and return true / false
 
 /////////////////////////////////////////////////////////////
 // 4. Solve or simplify if not able to produce full solution:
+const same = (arr1, arr2) => {
+    // Check different lengths edge case:
+    if (arr1.length !== arr2.length) {
+        return false
+    } else {
+        const freq1 = {}
+        const freq2 = {}
+        // Check frequencies
+        arr1.forEach(el => {
+            el *= el
+            freq1[el] = (freq1[el] || 0) + 1
+        })
+        arr2.forEach(el => {
+            freq2[el] = (freq2[el] || 0) + 1
+        })
+        // Compare and match each key:value pair between freq1 and freq2
+        for (n in freq1) {
+            if ((!(n in freq2)) || ((freq1[n] !== freq2[n]))) return false 
+        }
+    }
+    return true
+}
+
+console.log(same([3, 2], [4,9]))
 
 /////////////////////////////////////////////////////////////
 // 5. Refactor
