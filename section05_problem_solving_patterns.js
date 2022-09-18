@@ -168,3 +168,52 @@ console.log(sumZero([-6, 1, 3, 4, 5, 6, 7 ,9 ,100000])) // [ -6, 6 ]
 console.log(sumZero([])) // undefined
 console.log(sumZero([0, 1, 2])) // undefined
 console.log(sumZero([-1, 2])) // undefined
+
+/////////////////////////////////////////////////////////////
+// Ex.2: "countUniqueValues"
+/////////////////////////////////////////////////////////////
+console.log("\ncountUniqueValues:\n")
+/////////////////////////////////////////////////////////////
+// 1. Understand the problem:
+// Function accepts SORTED array of ints, returns int representing the count of unique values in the array
+
+/////////////////////////////////////////////////////////////
+// 2. Explore examples:
+// [1, 1, 1, 1, 1, 2] ==> 2
+// [0] ==> 0 edge case
+// [9] ==> 1
+// [-2, 0 , 1] ==> 3
+
+/////////////////////////////////////////////////////////////
+// 3. Break it down (pseudocode):
+// IF arr len is 0 ==> return 0
+// ELSE init 2 pointers for last idx and last -1 AND res array
+// Iterate over array, if arr elements are not equal and num is not in res than push to res
+// return length of res array
+
+/////////////////////////////////////////////////////////////
+// 4. Solve or simplify if not able to produce full solution:
+const countUniqueValues = (arr) => {
+    if (arr.length === 0 ) {
+        return 0
+    } else if (arr.length === 1 ) {
+        return 1
+    } else {
+        res = []
+        let l1 = arr.length - 1
+        let l2 = l1 - 1
+        while (l2 > -1) {
+            if (arr[l1] !== arr[l2]) {
+                res.push(arr[l1], arr[l2])
+            }
+            l1--
+            l2--
+        }
+    }
+    return res
+}
+
+console.log(countUniqueValues([1, 1, 1, 1, 1, 2]))
+console.log(countUniqueValues([]))
+// console.log(countUniqueValues())
+// console.log(countUniqueValues())
