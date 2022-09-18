@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////
 // Ex.1: "same"
 /////////////////////////////////////////////////////////////
-
+console.log("\nsame:\n")
 /////////////////////////////////////////////////////////////
 // 1. Understand the problem:
 // The function takes in 2 arrays
@@ -58,7 +58,7 @@ console.log(same([3, 2], [4,9]))
 /////////////////////////////////////////////////////////////
 // Ex.2: "Anagrarms"
 /////////////////////////////////////////////////////////////
-
+console.log("\nAnagrarms:\n")
 /////////////////////////////////////////////////////////////
 // 1. Understand the problem:
 // Function takes in 2 strings. Returns true if the 2nd string is an anagram of the 1st string.
@@ -114,3 +114,57 @@ console.log(validAnagram("cinema", "iceman")) // true
 console.log(validAnagram("IamLordVoldemort", "TomMarvoloRiddle")) // true
 console.log(validAnagram("", "")) // true
 console.log(validAnagram("apple", "lapel")) // false
+
+/////////////////////////////////////////////////////////////
+// Ex.2: "sumZero"
+/////////////////////////////////////////////////////////////
+console.log("\nsumZero:\n")
+/////////////////////////////////////////////////////////////
+// 1. Understand the problem:
+// Function accepts SORTED array of ints, returns and array with the FIRST pair of nums where num1 + num2 = 0
+// If no pair exists -> return undefined
+
+/////////////////////////////////////////////////////////////
+// 2. Explore examples:
+// [-1, 0, 1] ==> [-1, 1]
+// [-6, 1, 3, 4, 5, 6, 7 ,9 ,100000] ==> [-6, 6]
+// [] ==> undefined because empty
+// [0, ...] => undefined because first num is 0 so no sum will return 0 assuming nums cannot repeat
+// [-1, 2] => undefined
+
+/////////////////////////////////////////////////////////////
+// 3. Break it down (pseudocode):
+// IF num in idx 0 >= 0 ==> return
+// ELSE init "left and right" pointers
+// IF sum of nums in pointer pos is 0 ==> return these nums in an array
+// ELSE IF sum > 0 ==> decrease right by 1
+// ELSE IF sum < 0 ==> increase left by 1
+// Keep going until the pointers reach each other, that is the last possible point
+
+/////////////////////////////////////////////////////////////
+// 4. Solve or simplify if not able to produce full solution:
+const sumZero = (arr) => {
+    if (arr[0] === 0) {
+        return
+    } else {
+        // init pointers:
+        let left = 0
+        let right = arr.length - 1
+        while (left < right) {
+            const sum = arr[left] + arr[right]
+            if (sum === 0) {
+                return [arr[left], arr[right]]
+            } else if (sum > 0) {
+                right--
+            } else {
+                left++
+            }
+        }
+    }
+}
+
+console.log(sumZero([-1, 0, 1])) // [ -1, 1 ]
+console.log(sumZero([-6, 1, 3, 4, 5, 6, 7 ,9 ,100000])) // [ -6, 6 ]
+console.log(sumZero([])) // undefined
+console.log(sumZero([0, 1, 2])) // undefined
+console.log(sumZero([-1, 2])) // undefined
