@@ -90,26 +90,27 @@ const validAnagram = (str1, str2) => {
     } else {
         str1 = str1.toLowerCase()
         str2 = str2.toLowerCase()
-        const freq1 = {}
-        const freq2 = {}
-        // Getting frequency of each char in the strings
+        const freq = {}
+        // Getting frequency of each char in str1
         for (const idx in str1) {
             const char = str1[idx]
-            freq1[char] = (freq1[char] || 0) + 1
+            freq[char] = (freq[char] || 0) + 1
         }
+        // If current char does not exist as key in freq object - return false
+        // Otherwise subtract value of key by 1
         for (const idx in str2) {
             const char = str2[idx]
-            freq2[char] = (freq2[char] || 0) + 1
-        }
-        // comparing
-        for(key in freq1) {
-            if((!(key in freq2)) || (freq1[key] !== freq2[key])) return false
+            if (!freq[char]) {
+                return false
+            } else {
+                freq[char] -= 1
+            }
         }
     }
     return true
 }
 
-console.log(validAnagram("cinema", "iceman"))
-console.log(validAnagram("IamLordVoldemort", "TomMarvoloRiddle"))
-console.log(validAnagram("", ""))
-console.log(validAnagram("apple", "lapel"))
+console.log(validAnagram("cinema", "iceman")) // true
+console.log(validAnagram("IamLordVoldemort", "TomMarvoloRiddle")) // true
+console.log(validAnagram("", "")) // true
+console.log(validAnagram("apple", "lapel")) // false
