@@ -55,7 +55,7 @@ console.log(sameFrequency(3589578, 5879385)) // true
 console.log(sameFrequency(22,222)) // false
 
 /////////////////////////////////////////////////////////////
-// Ex.1: "areThereDuplicates"
+// Ex.2: "areThereDuplicates"
 /////////////////////////////////////////////////////////////
 console.log('\nareThereDuplicates:\n')
 /////////////////////////////////////////////////////////////
@@ -103,9 +103,63 @@ const  areThereDuplicates = (...args) => {
     return false
   }
 
-  console.log(areThereDuplicates('a', 8, 'k', 'a'))
-  console.log(areThereDuplicates(3, 2, 1, 4, 2))
-  console.log(areThereDuplicates('a', 'b', 'c', 'a'))
+console.log(areThereDuplicates('a', 8, 'k', 'a'))
+console.log(areThereDuplicates(3, 2, 1, 4, 2))
+console.log(areThereDuplicates('a', 'b', 'c', 'a'))
 console.log(areThereDuplicates(1, 2, 3))
 console.log(areThereDuplicates(1, 2, 2))
 console.log(areThereDuplicates('a', 'b', 'c', 'a'))
+
+/////////////////////////////////////////////////////////////
+// Ex.3: "averagePair"
+/////////////////////////////////////////////////////////////
+console.log('\naveragePair:\n')
+/////////////////////////////////////////////////////////////
+// 1. Understand the problem:
+// Function takes in sorted num array and target average
+// returns true if there are 1 or more pairs that match the average target
+// Time: O(N)
+// Space: O(1)
+
+/////////////////////////////////////////////////////////////
+// 2. Explore examples:
+// averagePair([1,2,3],2.5) // true
+// averagePair([1,3,3,5,6,7,10,12,19],8) // true
+// averagePair([-1,0,3,4,5,6], 4.1) // false
+// averagePair([],4) // false
+
+/////////////////////////////////////////////////////////////
+// 3. Break it down (pseudocode):
+// Edge case: returrn false if array is empty
+// init 2 pointers
+// iterate over sorted array, add nums and div by 2-
+// return true if avg matches target
+// return false if none found after loop
+
+/////////////////////////////////////////////////////////////
+// 4. Solve or simplify if not able to produce full solution:
+
+const averagePair = (arr, avg) => {
+    if (arr.length === 0) {
+        return false
+    } else {
+        let p1 = 0, p2 = arr.length - 1
+        while (p1 < p2) {
+            let currAvg = (arr[p1] + arr[p2]) / 2
+            console.log(`arr[p1] = ${arr[p1]}\tarr[p2] = ${arr[p2]}\tcurrAvg = ${currAvg}`)
+            if (currAvg === avg) {
+                return true
+            } else if(currAvg > avg) {
+                p2--
+            }   else if(currAvg < avg) {
+                p1++
+            }
+        }
+    }
+    return false
+}
+
+console.log(averagePair([1,2,3],2.5)) // true
+console.log(averagePair([1,3,3,5,6,7,10,12,19],8)) // true
+console.log(averagePair([-1,0,3,4,5,6], 4.1))// false
+console.log(averagePair([],4))// false
