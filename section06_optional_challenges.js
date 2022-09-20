@@ -89,10 +89,10 @@ const  areThereDuplicates = (...args) => {
         return false
     } else {
         let p1 = 0, p2 = 1
-        arr =args.sort()
-        for(let i = 0; i < arr.length; i++) {console.log(arr[i])}
-        while (p2 < arr.length - 1) {
+        args.sort()
+        while (p2 < args.length) {
             // compare without type
+            console.log(`args[p1] = ${args[p1]}\targs[p2] = ${args[p2]}`)
             if (args[p1] == args[p2]) {
                 return true
             }
@@ -106,3 +106,6 @@ const  areThereDuplicates = (...args) => {
   console.log(areThereDuplicates('a', 8, 'k', 'a'))
   console.log(areThereDuplicates(3, 2, 1, 4, 2))
   console.log(areThereDuplicates('a', 'b', 'c', 'a'))
+console.log(areThereDuplicates(1, 2, 3))
+console.log(areThereDuplicates(1, 2, 2))
+console.log(areThereDuplicates('a', 'b', 'c', 'a'))
