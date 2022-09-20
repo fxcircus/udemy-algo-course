@@ -58,3 +58,51 @@ console.log(sameFrequency(22,222)) // false
 // Ex.1: "areThereDuplicates"
 /////////////////////////////////////////////////////////////
 console.log('\nareThereDuplicates:\n')
+/////////////////////////////////////////////////////////////
+// 1. Understand the problem:
+// Functions accepts variable number of arguments
+// Returns true if there are any duplicates
+// Restrictions: Time and Space - O(n)
+// Q: what data types can we expect to receive? int, strings, arrays etc'..
+// Q: can more than 1 type be passed? strings AND ints for example?
+
+/////////////////////////////////////////////////////////////
+// 2. Explore examples:
+// (1, 2, 3) // false
+// ('a', 'b', 'c', 'a') // true 
+// ('a', 'b', 6, 6) // true
+
+/////////////////////////////////////////////////////////////
+// 3. Break it down (pseudocode):
+// Edge case: exit if 0 args passed
+// init 2 pointers for first and last pos in args array
+// iterate with while loop.
+// return true if p1 and p2 are equal
+// keep bringing them closer
+// return false in the end
+
+/////////////////////////////////////////////////////////////
+// 4. Solve or simplify if not able to produce full solution:
+
+const  areThereDuplicates = (...args) => {
+    if (args.length === 0) {
+        return false
+    } else {
+        let p1 = 0, p2 = 1
+        arr =args.sort()
+        for(let i = 0; i < arr.length; i++) {console.log(arr[i])}
+        while (p2 < arr.length - 1) {
+            // compare without type
+            if (args[p1] == args[p2]) {
+                return true
+            }
+            p1++
+            p2++
+        }
+    }
+    return false
+  }
+
+  console.log(areThereDuplicates('a', 8, 'k', 'a'))
+  console.log(areThereDuplicates(3, 2, 1, 4, 2))
+  console.log(areThereDuplicates('a', 'b', 'c', 'a'))
