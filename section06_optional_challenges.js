@@ -1,3 +1,4 @@
+/*
 /////////////////////////////////////////////////////////////
 // Ex.1: "sameFrequency"
 /////////////////////////////////////////////////////////////
@@ -138,7 +139,6 @@ console.log('\naveragePair:\n')
 
 /////////////////////////////////////////////////////////////
 // 4. Solve or simplify if not able to produce full solution:
-
 const averagePair = (arr, avg) => {
     if (arr.length === 0) {
         return false
@@ -163,3 +163,105 @@ console.log(averagePair([1,2,3],2.5)) // true
 console.log(averagePair([1,3,3,5,6,7,10,12,19],8)) // true
 console.log(averagePair([-1,0,3,4,5,6], 4.1))// false
 console.log(averagePair([],4))// false
+
+/////////////////////////////////////////////////////////////
+// Ex.4: "isSubsequence"
+/////////////////////////////////////////////////////////////
+console.log('\nisSubsequence:\n')
+/////////////////////////////////////////////////////////////
+// 1. Understand the problem:
+// Function takes 2 strings, returns true if  all the chars from str1 exist in str2 IN THE SAME ORDER
+
+/////////////////////////////////////////////////////////////
+// 2. Explore examples:
+// ["YYZ", 'Rush's song YYZ is OK] // true
+// ["Code", "Close to the edge"] //false because of the oder
+// Q: do we need to account for lowercase and uppercase? what about numbers?
+
+/////////////////////////////////////////////////////////////
+// 3. Break it down (pseudocode):
+// Edge case: return false if length of ONLY ONE OF str1 or str2 is 0
+// init  2 pointers, p1 with value 0 for str1 and p2 with value of length of str2
+// init lastPos var with value 0
+// use for in loop to iterate over str1
+// look for matches, save match pos in lastPos var
+// return false if lastPos > latest match
+
+/////////////////////////////////////////////////////////////
+// 4. Solve or simplify if not able to produce full solution:
+
+const isSubsequence = (str1, str2) => {
+    if((str1.length === 0 && str2.length === 0) || (str1.length === 0 && str2.length !== 0) || (str1.length !== 0 && str2.length === 0)) {
+        return false
+    } else {
+        let p1 = 0, p2 = 0
+        while (p2 < str2.length) {
+            if  (str1[p1] === str2[p2]) {
+                p1++
+            }
+            if (p1 === str1.length) {
+                return true
+            }
+            p2++
+        }
+    }
+    return false
+}
+console.log(isSubsequence('hello', 'hello world')) // true
+console.log(isSubsequence('sing', 'sting')) // true
+console.log(isSubsequence('abc', 'abracadabra')) // true
+console.log(isSubsequence('abc', 'acb')) // false (order matters)
+// console.log(isSubsequence("","")) // false (edge case)
+// console.log(isSubsequence("a","")) // false (edge case)
+// console.log(isSubsequence("","a")) // false (edge case)
+*/
+/////////////////////////////////////////////////////////////
+// Ex.4: "maxSubarraySum"
+/////////////////////////////////////////////////////////////
+console.log('\nmaxSubarraySum:\n')
+/////////////////////////////////////////////////////////////
+// 1. Understand the problem:
+// Function takes array and int for num of elements. returns max sum of cunsecutive elements.
+
+/////////////////////////////////////////////////////////////
+// 2. Explore examples:
+// ([1, 2, 3 , 0,  5, 9], 3) ==> 14
+// ([a, ...], 2) ==> null
+// ([], 2) ==> null
+
+/////////////////////////////////////////////////////////////
+// 3. Break it down (pseudocode):
+// Edge case: return null if empty array OR has fewer elements than n
+// init maxSum and tempSum vars with val 0
+// get initial maxSum by iterating and summing first n elements
+// exit loop, start a new loop
+// iterate over array again, starting from n element. For each run-
+// Subtract last element and add next element.
+// Compare to maxSum
+// Return maxSum
+
+/////////////////////////////////////////////////////////////
+// 4. Solve or simplify if not able to produce full solution:
+
+const maxSubarraySum = (arr, num) => {
+    if (arr.length < num) {
+        return null
+    } else {
+        let maxSum = 0, tempSum = 0
+        for (let i = 0; i < num; i++) {
+            maxSum += arr[i]
+        }
+        tempSum = maxSum
+        for (let i = num; i < arr.length; i++) {
+            tempSum = tempSum - arr[i - num] + arr[i]
+            maxSum = maxSum < tempSum ? tempSum : maxSum
+        }
+        return maxSum
+    }
+}
+
+console.log(maxSubarraySum([100,200,300,400], 2)) // 700
+console.log(maxSubarraySum([1,4,2,10,23,3,1,0,20], 4)) // 39
+// console.log(maxSubarraySum([-3,4,0,-2,6,-1], 2)) // 5
+// console.log(maxSubarraySum([3,-2,7,-4,1,-1,4,-2,1],2)) // 5
+// console.log(maxSubarraySum([2,3], 3)) //null
