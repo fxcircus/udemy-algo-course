@@ -71,7 +71,7 @@ const reverse = (str) => {
     if (str.length <= 1) return str
     return reverse(str.slice(1)) + str[0]
 }
-console.log(reverse('awesome')) // 'emosewa'
+// console.log(reverse('awesome')) // 'emosewa'
 // reverse('wesome') + a
 // reverse('esome') + w
 // reverse('some') + e
@@ -80,7 +80,7 @@ console.log(reverse('awesome')) // 'emosewa'
 // reverse('e') + m
 // ==> e + m + o + s + e + w + a = emosewa
 
-reverse('rithmschool') // 'loohcsmhtir'
+// reverse('rithmschool') // 'loohcsmhtir'
 // reverse('ithmschool') + r
 // reverse('thmschool') + i
 // reverse('hmschool') + t
@@ -92,3 +92,21 @@ reverse('rithmschool') // 'loohcsmhtir'
 // reverse('ol') + o
 // reverse('l') + o
 // loohcsmhtir
+
+/////////////////////////////////////////////////////////////
+// 6: isPalindrome
+/////////////////////////////////////////////////////////////
+// returns true if the string passed to it is a palindrome (reads the same forward and backward).
+// Otherwise it returns false.
+// *** Q: need to check edge case when str is sent as 1 string
+const isPalindrome = (str) => {
+    if(str.length === 1) return true
+    if(str[0] !== str[str.length - 1]) return false
+    isPalindrome(str.slice(1,-1))
+    return true
+}
+console.log(isPalindrome('tacocat'))// true
+console.log(isPalindrome('awesome')) // false
+console.log(isPalindrome('foobar')) // false
+console.log(isPalindrome('amanaplanacanalpanama')) // true
+console.log(isPalindrome('amanaplanacanalpandemonium')) // false
