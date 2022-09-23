@@ -43,10 +43,10 @@ const productOfArray = (arr) => {
     if (arr.length === 0) return 1
     return arr[0] * productOfArray(arr.slice(1))
 }
-console.log(productOfArray([1,2,3])) // 6
+// console.log(productOfArray([1,2,3])) // 6
 
 /////////////////////////////////////////////////////////////
-// 3: fib
+// 4: fib
 /////////////////////////////////////////////////////////////
 // Write a recursive function called fib which accepts a number and returns the nth number in the Fibonacci sequence. 
 const fib = (n) => {
@@ -55,7 +55,7 @@ const fib = (n) => {
 }
 fib(4) // 0, 1, 1, 2 = 3
 // fib(3) + fib(2) ==> fib(2) + fib(1)  ==> 1 + 1 = 2 ==> 2 + fib(2) ==> 2 + 1  = 3
-console.log(fib(8)) // 0, 1, 1, 2, 3, 5, 8, 13, 21 
+// console.log(fib(8)) // 0, 1, 1, 2, 3, 5, 8, 13, 21 
 // fib(7) + fib(6)
 // fib(6) + fib(5) + fib(5) + fib(4)
 // fib(5) + fib(4) +fib(4) + fib(3) + fib(4) + fib(3) + fib(3) + fib(2)
@@ -63,3 +63,32 @@ console.log(fib(8)) // 0, 1, 1, 2, 3, 5, 8, 13, 21
 // fib(3) + fib(2) + fib(2) + fib(1) + fib(2) + fib(1) + 1 + fib(2) + fib(1) + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 1 + 1 +1
 // 2 + 5 + 3 + 11 = 21
 
+/////////////////////////////////////////////////////////////
+// 5: reverse
+/////////////////////////////////////////////////////////////
+// Write a recursive function called reverse which accepts a string and returns a new string in reverse.
+const reverse = (str) => {
+    if (str.length <= 1) return str
+    return reverse(str.slice(1)) + str[0]
+}
+console.log(reverse('awesome')) // 'emosewa'
+// reverse('wesome') + a
+// reverse('esome') + w
+// reverse('some') + e
+// reverse('ome') + s
+// reverse('me') + o
+// reverse('e') + m
+// ==> e + m + o + s + e + w + a = emosewa
+
+reverse('rithmschool') // 'loohcsmhtir'
+// reverse('ithmschool') + r
+// reverse('thmschool') + i
+// reverse('hmschool') + t
+// reverse('mschool') + h
+// reverse('school') + m
+// reverse('chool') + s
+// reverse('hool') + c
+// reverse('ool') + h
+// reverse('ol') + o
+// reverse('l') + o
+// loohcsmhtir
