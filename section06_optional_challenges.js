@@ -214,9 +214,9 @@ console.log(isSubsequence('abc', 'acb')) // false (order matters)
 // console.log(isSubsequence("","")) // false (edge case)
 // console.log(isSubsequence("a","")) // false (edge case)
 // console.log(isSubsequence("","a")) // false (edge case)
-*/
+
 /////////////////////////////////////////////////////////////
-// Ex.4: "maxSubarraySum"
+// Ex.5: "maxSubarraySum"
 /////////////////////////////////////////////////////////////
 console.log('\nmaxSubarraySum:\n')
 /////////////////////////////////////////////////////////////
@@ -265,3 +265,75 @@ console.log(maxSubarraySum([1,4,2,10,23,3,1,0,20], 4)) // 39
 // console.log(maxSubarraySum([-3,4,0,-2,6,-1], 2)) // 5
 // console.log(maxSubarraySum([3,-2,7,-4,1,-1,4,-2,1],2)) // 5
 // console.log(maxSubarraySum([2,3], 3)) //null
+*/
+
+/////////////////////////////////////////////////////////////
+// Ex.6: "minSubArrayLen"
+/////////////////////////////////////////////////////////////
+
+// ([2,3,1,2,4,3], 7)
+// 2, 3, 1, 2 ==> 8
+// 3, 1, 2, 4 ==> 10
+// 1, 2, 4 ==> 7
+// 2, 4, 3 ==> 9
+// 4, 3 ==> 7
+
+// ([2,1,6,5,4], 9), 5
+// 2, 1, 6 ==> 9
+// 1, 6, 5 ==> 12
+// 6, 5 ==> 11
+// 5, 4 ==> 9
+
+// MY solution attempt
+const minSubArrayLen1 = (arr, num) => {
+    let minLen = 0, tempLen = 0, minSum = 0, tempSum = 0, idx = 0
+    while (minSum < num) {
+        minSum += arr[idx]
+        minLen++
+        idx++
+    }
+    for (let i = idx; i < arr.length; i++) {
+        while (tempSum < num) {
+            tempSum += arr[i]
+            i++
+            tempLen++
+        }
+        minLen = minLen > tempLen ? tempLen : minLen
+        tempLen = 0
+    }
+    return minLen
+}
+
+// Refactored solution
+function minSubArrayLen2(nums, sum) {
+    let total = 0;
+    let start = 0;
+    let end = 0;
+    let minLen = Infinity;
+   
+    while (start < nums.length) {
+      // if current window doesn't add up to the given sum then 
+          // move the window to right
+      if(total < sum && end < nums.length){
+        total += nums[end];
+              end++;
+      }
+      // if current window adds up to at least the sum given then
+          // we can shrink the window 
+      else if(total >= sum){
+        minLen = Math.min(minLen, end-start);
+              total -= nums[start];
+              start++;
+      } 
+      // current total less than required total but we reach the end, need this or else we'll be in an infinite loop 
+      else {
+        break;
+      }
+    }
+   
+    return minLen === Infinity ? 0 : minLen;
+  }
+  
+// minSubArrayLen([2,3,1,2,4,3], 7)
+
+console.log(minSubArrayLen2([3,1,7,11,2,9,8,21,62,33,19], 52))
