@@ -9,7 +9,10 @@
 
 // Big O time complexity:   O(n^2)
 // Big O space complexity:   O(1)
-// ------------------------------------
+// -------------------------------
+
+// Use case: Good for nearly sorted data
+// -------------------------------------
 //////////////////////////////////////////////////////////////////////////////////////////////
 const bubbleSort = (arr) => {
     let  noSwapsOnLastIteration

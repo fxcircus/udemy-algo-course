@@ -13,7 +13,7 @@
 // Big O space complexity:   O(1)
 // ------------------------------------
 
-// Use case: Good for sorting several items in begining of array
+// Use case: Good for nearly sorted data
 // -------------------------------------------------------------
 //////////////////////////////////////////////////////////////////////////////////////////////
 const selectionSort = (arr) => {
