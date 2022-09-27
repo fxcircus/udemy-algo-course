@@ -4,6 +4,7 @@
 // General idea - gradually creates sorted left half of arr. we "insert" the curr el into that half
 
 // Big O time complexity:   O(n^2)
+// Big O space complexity:   O(1)
 // ------------------------------------
 
 // Good use case: Sorting live incoming data where most of the arrray is aleady sorted

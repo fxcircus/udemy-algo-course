@@ -8,6 +8,7 @@
 // Break out if no swaps occured ==> array is sorted
 
 // Big O time complexity:   O(n^2)
+// Big O space complexity:   O(1)
 // ------------------------------------
 //////////////////////////////////////////////////////////////////////////////////////////////
 const bubbleSort = (arr) => {

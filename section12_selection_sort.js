@@ -10,6 +10,7 @@
 // return sorted arr
 
 // Big O time complexity:   O(n^2)
+// Big O space complexity:   O(1)
 // ------------------------------------
 
 // Use case: Good for sorting several items in begining of array
