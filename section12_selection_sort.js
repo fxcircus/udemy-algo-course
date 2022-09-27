@@ -11,6 +11,9 @@
 
 // Big O time complexity:   O(n^2)
 // ------------------------------------
+
+// Use case: Good for sorting several items in begining of array
+// -------------------------------------------------------------
 //////////////////////////////////////////////////////////////////////////////////////////////
 const selectionSort = (arr) => {
     let noSwapsOnLastIteration
