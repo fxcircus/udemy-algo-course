@@ -1,6 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 // Bubble Sort:
 // ------------
+// General idea - compare 2 idxs and keep moving lower vals down
 // 2 loops. Loop 1 iterates from start to end and then end - 1 each time
 // Loop 2 iterated from start to currrent end (i) - 1
 // We compare objects within the internal loop and swap if el in pos j is greater than j + 1
