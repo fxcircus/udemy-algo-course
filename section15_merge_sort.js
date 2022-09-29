@@ -3,7 +3,7 @@
 // ---------------
 // General idea - Break array into smaller arrays and then sort and merge them back together
 // Big O time complexity:       O(n log n)
-// Big O space complexity:      O(n log n)
+// Big O space complexity:      O(n)
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 // Step 1: merging function - takes 2 SORTED arrays and puts them together. O(n + m) complexity
