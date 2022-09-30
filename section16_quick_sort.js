@@ -2,6 +2,8 @@
 ------------------
 General idea - Split array into smaller arrays (recursion) and then sort back together by pivot el
 Big O time complexity:       Best==> O(n log n)  Worst==> O(n^2)
+    *** Worst case, example: fully sorted array [1, 2, 3 ,4 ...] and pivotIdx = 0.
+        Can be improved by pivoting on random num instead of the 1st el ***
 Big O space complexity:      O(n log n)
 */
 
