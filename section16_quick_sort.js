@@ -1,8 +1,8 @@
 /* Insertion Sort:
 ------------------
 General idea - Split array into smaller arrays (recursion) and then sort back together by pivot el
-Big O time complexity:       O(n log n)
-Big O space complexity:      O(n)
+Big O time complexity:       Best==> O(n log n)  Worst==> O(n^2)
+Big O space complexity:      O(n log n)
 */
 
 /* Step 1 - pivot \ partition function:
