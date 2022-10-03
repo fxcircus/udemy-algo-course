@@ -38,25 +38,38 @@ class SinglyLinkedList {
         this.tail = null
         this.length = 0
     }
+    // push:    add new node to end
+    push(val) {
+        const newNode = new Node(val)
+        if (!this.head) {
+            this.head = newNode
+            this.tail = this.head
+        } else {
+            this.tail.next = newNode
+            this.tail = newNode 
+        }
+        this.length++
+        return this
+    }
+    // pop:     remove node from end
 
-    // push
+    // shift:   remove 1st node
 
-    // pop
+    // unshift: add new node to beginning
 
-    // shift
+    // get:     return "idx" of node n
 
-    // unshift
+    // set:     change val of "idx" of node n   
 
-    // get
+    // insert:  add node at "idx" n
 
-    // set
+    // remove:  remvoe node at "idx" n
 
-    // insert
-
-    // remove
-
-    // reverse
+    // reverse: reverse ndoe list order
 }
 
 const list = new SinglyLinkedList()
-console.log(list)
+console.log(list.push(1))
+console.log(list.push(2))
+console.log(list.push(3))
+console.log(list.push(4))
