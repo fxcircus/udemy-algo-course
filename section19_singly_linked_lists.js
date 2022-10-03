@@ -41,7 +41,7 @@ class SinglyLinkedList {
     // push:    add new node to end
     push(val) {
         const newNode = new Node(val)
-        if (!this.head) {
+        if (!this.head) /* edge case: empty list */{
             this.head = newNode
             this.tail = this.head
         } else {
@@ -52,7 +52,20 @@ class SinglyLinkedList {
         return this
     }
     // pop:     remove node from end
-
+    pop() {
+        if (!this.head || this.length === 0) return undefined // edge case
+        let currNode = this.head
+        let newTail = currNode
+        while (currNode.next) {
+            newTail = currNode
+            currNode = currNode.next
+        }
+        this.tail = newTail
+        this.tail.next = null
+        this.length--
+        if (this.length === 0) this.head = this.tail = null // reset empty list
+        return currNode
+    }
     // shift:   remove 1st node
 
     // unshift: add new node to beginning
@@ -69,7 +82,11 @@ class SinglyLinkedList {
 }
 
 const list = new SinglyLinkedList()
-console.log(list.push(1))
-console.log(list.push(2))
-console.log(list.push(3))
-console.log(list.push(4))
+list.push(1)
+// list.push(2)
+// list.push(3)
+// console.log(list.head)      //  Node { val: 1, next: Node { val: 2, next: null } }
+// console.log(list.head.next) //  Node { val: 2, next: Node { val: 3, next: null } }
+// console.log(list.tail)      //  Node { val: 3, next: null }
+console.log(list.pop())
+console.log(list)
