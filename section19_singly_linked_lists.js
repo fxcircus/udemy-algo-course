@@ -114,16 +114,25 @@ class SinglyLinkedList {
         if (idx < 0 || idx > this.length) return false // edge case: out of bounds
         if (idx === this.length) return !!this.push(val) // edge case: last item
         if (idx === 0) return !!this.unshift(val) // edge case: first item
-        const  newNode = new Node(val)
+        const newNode = new Node(val)
         const prevNode = this.get(idx - 1)
         newNode.next = prevNode.next
         prevNode.next = newNode
         this.length++
         return true
     }
-    // remove:  remvoe node at "idx" n
+    // remove:  remove node at "idx" n
     // ===============================
-
+    remove(idx) {
+        if (idx < 0 || idx > this.length) return undefined // edge case: out of bounds
+        if (idx === 0) return this.shift() // edge case: first item
+        if (idx === this.length - 1) return this.pop() // edge case: last item
+        const prevNode = this.get(idx - 1)
+        const removedNode = prevNode.next
+        prevNode.next = removedNode.next
+        this.length--
+        return removedNode
+    }
     // reverse: reverse ndoe list order
     // ================================
 }
@@ -143,4 +152,6 @@ list.push(3)
 // console.log(list.get(3))
 console.log(list.insert(2,4))
 console.log(list.length)
+console.log(list.remove(1))
+console.log(list.get(2))
 // console.log()
