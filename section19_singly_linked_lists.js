@@ -39,6 +39,7 @@ class SinglyLinkedList {
         this.length = 0
     }
     // push:    add new node to end
+    // ============================
     push(val) {
         const newNode = new Node(val)
         if (!this.head) /* edge case: empty list */{
@@ -52,6 +53,7 @@ class SinglyLinkedList {
         return this
     }
     // pop:     remove node from end
+    // ============================
     pop() {
         if (!this.head || this.length === 0) return undefined // edge case
         let currNode = this.head
@@ -67,6 +69,7 @@ class SinglyLinkedList {
         return currNode
     }
     // shift:   remove node from beginning
+    // ===================================
     shift() {
         if(!this.head) return undefined // edge case: empty list
         let newHead = this.head.next
@@ -76,6 +79,7 @@ class SinglyLinkedList {
         return this.head
     }
     // unshift: add new node to beginning
+    // ==================================
     unshift(val) {
         let newNode = new Node(val)
         if (!this.head) this.head = this.tail = newNode
@@ -85,8 +89,9 @@ class SinglyLinkedList {
         return this
     }
     // get:     return "idx" of node n
+    // ===============================
     get(idx) {
-        if (idx > this.length) return null
+        if (idx > this.length) return null // edge case: out of bounds
         let currNode = this.head
         for (let i = 1; i < idx; i++) {
             currNode = currNode.next
@@ -94,19 +99,33 @@ class SinglyLinkedList {
         return currNode
     }
     // set:     change val of "idx" of node n 
+    // ======================================
     set(idx, val) {
         let nodeToChange = this.get(idx)
         if (nodeToChange) {
             nodeToChange.val = val
+            return true
         }
-        return nodeToChange
+        return false
     }  
-
     // insert:  add node at "idx" n
-
+    // ============================
+    insert(idx, val) {
+        if (idx < 0 || idx > this.length) return false // edge case: out of bounds
+        if (idx === this.length) return !!this.push(val) // edge case: last item
+        if (idx === 0) return !!this.unshift(val) // edge case: first item
+        const  newNode = new Node(val)
+        const prevNode = this.get(idx - 1)
+        newNode.next = prevNode.next
+        prevNode.next = newNode
+        this.length++
+        return true
+    }
     // remove:  remvoe node at "idx" n
+    // ===============================
 
     // reverse: reverse ndoe list order
+    // ================================
 }
 
 const list = new SinglyLinkedList()
@@ -120,5 +139,8 @@ list.push(3)
 // console.log(list)
 // console.log(list.shift())
 // console.log(list.unshift(4))
-console.log(list.get(3))
-console.log(list.set(3, 5))
+// console.log(list.set(3, 5))
+// console.log(list.get(3))
+console.log(list.insert(2,4))
+console.log(list.length)
+// console.log()
