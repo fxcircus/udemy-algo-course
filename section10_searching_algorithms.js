@@ -1,5 +1,6 @@
 /////////////////////////////////////////////////////////////
 // 1: Linear search
+// Big O time complexity: Best - O(1)    Average - O(n)
 /////////////////////////////////////////////////////////////
 function linearSearch(arr, n){
     for (let idx in arr) {
@@ -9,7 +10,8 @@ function linearSearch(arr, n){
 }
 
 /////////////////////////////////////////////////////////////
-// 2: Binary search
+// 2: Binary search (Divide and Conquer)
+// Big O time complexity: Best - O(1)    Average - O(log n)
 /////////////////////////////////////////////////////////////
 function binarySearch(arr, n){
     let lPointer = 0, rPointer = arr.length, mid
