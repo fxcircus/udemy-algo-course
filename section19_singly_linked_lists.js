@@ -85,8 +85,22 @@ class SinglyLinkedList {
         return this
     }
     // get:     return "idx" of node n
-
-    // set:     change val of "idx" of node n   
+    get(idx) {
+        if (idx > this.length) return null
+        let currNode = this.head
+        for (let i = 1; i < idx; i++) {
+            currNode = currNode.next
+        }
+        return currNode
+    }
+    // set:     change val of "idx" of node n 
+    set(idx, val) {
+        let nodeToChange = this.get(idx)
+        if (nodeToChange) {
+            nodeToChange.val = val
+        }
+        return nodeToChange
+    }  
 
     // insert:  add node at "idx" n
 
@@ -105,4 +119,6 @@ list.push(3)
 // console.log(list.pop())
 // console.log(list)
 // console.log(list.shift())
-console.log(list.unshift(4))
+// console.log(list.unshift(4))
+console.log(list.get(3))
+console.log(list.set(3, 5))
