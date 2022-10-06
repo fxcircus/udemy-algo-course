@@ -33,6 +33,7 @@ class DoublyLinkedList {
     }
     push(val) {
         const newNode = new Node(val)
+        // Edge case: empty list
         if(this.length === 0) {
             this.tail = newNode
             this.head = newNode
@@ -45,11 +46,24 @@ class DoublyLinkedList {
         return this
     }
     pop() {
-
+        // Edge case 1: empty list
+        if(this.length === 0) return undefined 
+        let oldTail = this.tail
+        // Edge case 2: only 1 item
+        if (this.lengh === 1) {
+            this.head = this.tail = null
+        } else {
+            this.tail = oldTail.prev // tail-1 is new tail
+            this.tail.next = null   // remove new tail next
+            oldTail.prev = null     // remove old tail prev
+        }
+        this.length--
+        return oldTail
     }
 }
 
 const list = new DoublyLinkedList()
-list.push(1)
-list.push(2)
+list.push(1)                // 1
+list.push(2)                // 1<->2
+list.pop()                  // 1
 console.log(list)
