@@ -60,10 +60,26 @@ class DoublyLinkedList {
         this.length--
         return oldTail
     }
+    shift(){
+        if(this.length === 0) return undefined
+        var oldHead = this.head
+        if(this.length === 1){
+            this.head = null
+            this.tail = null
+        }else{
+            this.head = oldHead.next
+            this.head.prev = null
+            oldHead.next = null
+        }
+        this.length--
+        return oldHead
+    }
 }
 
 const list = new DoublyLinkedList()
 list.push(1)                // 1
 list.push(2)                // 1<->2
 list.pop()                  // 1
+list.push(3)                // 1 - 3
+list.shift()                  // 3
 console.log(list)
