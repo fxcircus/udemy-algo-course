@@ -123,6 +123,19 @@ class DoublyLinkedList {
             return false // Edge case: no node found in get()
         }
     }
+    insert(idx, val) {
+        if(idx < 0 || idx >= this.length) return null // Edge case 1: out of bounds  
+        if (idx === 0) return this.unshift(val) // E.C 2: use unshift() for beginning of list
+        if (idx === this.length) return this.push(val) // E.C 3: use push() for end of list
+        const prevNode = this.get(idx - 1)
+        const newNode = new Node(val)
+        newNode.next = prevNode.next
+        newNode.prev = prevNode
+        prevNode.next.prev = newNode
+        prevNode.next = newNode
+        this.length++
+        return true
+    }
     print() {
         const arr = []
         let currNode = this.head
@@ -146,7 +159,8 @@ list.unshift(5)             // 5 - 1
 list.push(2)                // 5 - 1 - 2
 list.push(3)                // 5 - 1 - 2 - 3
 list.push(4)                // 5 - 1 - 2 - 3 - 4
-// console.log(list.get(5))    // null
-// console.log(list.get(3))    // 3
+// console.log(list.get(5))  
+// console.log(list.get(3))  
 list.set(2, 100)             // 5 - 1 - 100 - 3 - 4
+list.insert(4, 500)          // 5 - 1 - 100 - 500 - 3 - 4
 list.print()
