@@ -1,7 +1,9 @@
 /* Singly linked lists:
 =======================
-Linke singly linked but we add a pointer for previous node 
-(last node.next = null)
+Like singly linked list, but with added pointer for previous node.
+
+*last node.next = null
+
 
 Example:
 ========
@@ -12,10 +14,12 @@ HEAD--------------LENGTH---------------TAIL
 
 Big O time complexity:
 ======================
-Insertion   
-Removal     
-Searching   
-Access      
+Insertion   O(1)
+Removal     O(1) *Better than singly linked lists because we don't need to loop from begining to end
+Searching   O(N) *Technically O(N / 2) but simplifies to O(N)
+Access      O(N)
+
+**Big O SPACE complexity - the extra prev pointer takes more space.
 */
 class Node {
     constructor(val) {
