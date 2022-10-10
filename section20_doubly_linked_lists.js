@@ -124,9 +124,9 @@ class DoublyLinkedList {
         }
     }
     insert(idx, val) {
-        if(idx < 0 || idx >= this.length) return null // Edge case 1: out of bounds  
-        if (idx === 0) return this.unshift(val) // E.C 2: use unshift() for beginning of list
-        if (idx === this.length) return this.push(val) // E.C 3: use push() for end of list
+        if(idx < 0 || idx > this.length) return null // Edge case 1: out of bounds  
+        if(idx === 0) return this.unshift(val) // E.C 2: use unshift() for beginning of list
+        if(idx === this.length) return this.push(val) // E.C 3: use push() for end of list
         const prevNode = this.get(idx - 1)
         const newNode = new Node(val)
         newNode.next = prevNode.next
@@ -136,6 +136,18 @@ class DoublyLinkedList {
         this.length++
         return true
     }
+    remove(idx) {
+        if(idx < 0 || idx >= this.length) return null // Edge case 1: out of bounds  
+        if(idx === 0) return this.shift() // E.C 2: use shift() for beginning of list
+        if(idx === this.length - 1) return this.pop() // E.C 3: use pop() for end of list
+        let nodeToRemove = this.get(idx)
+        nodeToRemove.prev.next = nodeToRemove.next
+        nodeToRemove.next.prev  = nodeToRemove.prev
+        nodeToRemove =  null
+        this.length--
+        return nodeToRemove
+    }
+    // aux method, prints list as array for readability
     print() {
         const arr = []
         let currNode = this.head
@@ -162,5 +174,7 @@ list.push(4)                // 5 - 1 - 2 - 3 - 4
 // console.log(list.get(5))  
 // console.log(list.get(3))  
 list.set(2, 100)             // 5 - 1 - 100 - 3 - 4
-list.insert(4, 500)          // 5 - 1 - 100 - 500 - 3 - 4
+list.insert(3, 500)          // 5 - 1 - 100 - 500 - 3 - 4
+list.remove(1)               // 5 - 100 - 500 - 3 - 4
+list.remove(4)               // 5 - 100 - 500 - 4
 list.print()
