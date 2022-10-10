@@ -89,35 +89,48 @@ class DoublyLinkedList {
         }
         this.length++
         return this
-    }
-    
+    }   
     get(idx) {
         // Edge cases: index is negative OR out of bounds  
         if(idx < 0 || idx >= this.length) return null
         /* get() optimization over singly linked list! -
         we can either loop from the start using the Node.next property
         or from the end using Node.prev */
-        const midPoint = Math.floor(this.length / 2)
-        let currNode
-        if(idx > midPoint) {
+        let currNode, count
+        if(idx >= this.length / 2) {
+            count = this.length - 1
             currNode = this.tail
-            for(let i = this.length; i > midPoint; i--) {
-                if (i = idx) {
-                    return currNode
-                } else {
-                    currNode = currNode.prev
-                }
+            while(count !== idx) {
+                currNode = currNode.prev
+                count--
             }
         } else {
+            count = 0
             currNode = this.head
-            for(let i = 0; i < midPoint; i++) {
-                if (i = idx) {
-                    return currNode
-                } else {
-                    currNode = currNode.next
-                }
+            while(count !== idx) {
+                currNode = currNode.next
+                count++
             }
         }
+        return currNode
+    }
+    set(idx, val) {
+        const theNode = this.get(idx)
+        if(theNode) {
+            theNode.val = val
+            return true
+        } else {
+            return false // Edge case: no node found in get()
+        }
+    }
+    print() {
+        const arr = []
+        let currNode = this.head
+        while(currNode) {
+            arr.push(currNode.val)
+            currNode = currNode.next
+        }
+        console.log(arr)
     }
 }
 
@@ -133,6 +146,7 @@ list.unshift(5)             // 5 - 1
 list.push(2)                // 5 - 1 - 2
 list.push(3)                // 5 - 1 - 2 - 3
 list.push(4)                // 5 - 1 - 2 - 3 - 4
-console.log(list.get(5))    // null
-console.log(list.get(3))    // 3
-// console.log(list)
+// console.log(list.get(5))    // null
+// console.log(list.get(3))    // 3
+list.set(2, 100)             // 5 - 1 - 100 - 3 - 4
+list.print()
