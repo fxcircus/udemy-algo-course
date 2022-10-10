@@ -48,7 +48,7 @@ class DoublyLinkedList {
     pop() {
         // Edge case 1: empty list
         if(this.length === 0) return undefined 
-        let oldTail = this.tail
+        const oldTail = this.tail
         // Edge case 2: only 1 item
         if (this.lengh === 1) {
             this.head = this.tail = null
@@ -60,13 +60,15 @@ class DoublyLinkedList {
         this.length--
         return oldTail
     }
-    shift(){
-        if(this.length === 0) return undefined
-        var oldHead = this.head
-        if(this.length === 1){
+    shift() {
+        // Edge case 1: empty list
+        if(this.length === 0) return undefined 
+        const oldHead = this.head
+        // Edge case 2: only 1 item
+        if(this.length === 1) {
             this.head = null
             this.tail = null
-        }else{
+        } else {
             this.head = oldHead.next
             this.head.prev = null
             oldHead.next = null
@@ -74,38 +76,48 @@ class DoublyLinkedList {
         this.length--
         return oldHead
     }
-    unshift(val){
-        var newNode = new Node(val)
+    unshift(val) {
+        const newHead = new Node(val)
+        // Edge case 1: empty list
         if(this.length === 0) {
-            this.head = newNode
-            this.tail = newNode
+            this.head = newHead
+            this.tail = newHead
         } else {
-            this.head.prev = newNode
-            newNode.next = this.head
-            this.head = newNode
+            this.head.prev = newHead
+            newHead.next = this.head
+            this.head = newHead
         }
         this.length++
         return this
     }
-    get(index){
-        if(index < 0 || index >= this.length) return null
-        var count, current
-        if(index <= this.length/2){
-            count = 0
-            current = this.head
-            while(count !== index){
-                current = current.next
-                count++
+    
+    get(idx) {
+        // Edge cases: index is negative OR out of bounds  
+        if(idx < 0 || idx >= this.length) return null
+        /* get() optimization over singly linked list! -
+        we can either loop from the start using the Node.next property
+        or from the end using Node.prev */
+        const midPoint = Math.floor(this.length / 2)
+        let currNode
+        if(idx > midPoint) {
+            currNode = this.tail
+            for(let i = this.length; i > midPoint; i--) {
+                if (i = idx) {
+                    return currNode
+                } else {
+                    currNode = currNode.prev
+                }
             }
         } else {
-            count = this.length - 1
-            current = this.tail
-            while(count !== index){
-                current = current.prev
-                count--
+            currNode = this.head
+            for(let i = 0; i < midPoint; i++) {
+                if (i = idx) {
+                    return currNode
+                } else {
+                    currNode = currNode.next
+                }
             }
         }
-        return current
     }
 }
 
@@ -114,5 +126,13 @@ list.push(1)                // 1
 list.push(2)                // 1<->2
 list.pop()                  // 1
 list.push(3)                // 1 - 3
-list.shift()                  // 3
-console.log(list)
+list.shift()                // 3
+list.shift()                // { head: null, tail: null, length: 0 }
+list.push(1)                // 1
+list.unshift(5)             // 5 - 1
+list.push(2)                // 5 - 1 - 2
+list.push(3)                // 5 - 1 - 2 - 3
+list.push(4)                // 5 - 1 - 2 - 3 - 4
+console.log(list.get(5))    // null
+console.log(list.get(3))    // 3
+// console.log(list)
