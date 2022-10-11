@@ -20,6 +20,13 @@ Example:
     last---size=4----first
     |                   |
 <-- |4|<--|6|<--|8|<--|2|
+
+Big O time complexity:
+======================
+Insertion   O(1)
+Removal     O(1)
+Searching   O(N) // not commonly used in stacks
+Access      O(N) // not commonly used in stacks
 */
 class Node {
     constructor(val) {
