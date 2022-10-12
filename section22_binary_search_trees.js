@@ -1,7 +1,10 @@
 /* Binary Search Tree:
 ======================
 -   A nonlinear data structure, that consists of nodes in a parent-child relationships
--   Examples: HTML DOM, AI models, JSON, Folders in an OS
+-   Parent nodes have <= 2 children
+-   Left child node < parent
+-   Right child node > parent
+-   Common use cases: HTML DOM, AI models, JSON, Folders in an OS
 
 Terminology:
 ============
