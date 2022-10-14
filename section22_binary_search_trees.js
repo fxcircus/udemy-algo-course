@@ -17,7 +17,7 @@ Edge:       the connection between the nodes
 
 Example:
 ========
-    ________1________
+    ________7________
     |               |
 ____5____       ____12
 |       |       |
@@ -41,18 +41,57 @@ class Node {
 
 class BinarySearchTree {
     constructor(val) {
-        this.roott = null
+        this.root = null
+    }
+    insert(val) {
+        const newNode = new Node(val)
+        if(!this.root) {
+            this.root = newNode // Edge case: init root if tree is empty
+        } else {
+            let currNode = this.root
+            while(true) {
+                if (newNode.val < currNode.val) {
+                    if(!currNode.left) {
+                        currNode.left = newNode
+                        return this
+                    } else {
+                        currNode = currNode.left
+                    }
+                } else if (newNode.val > currNode.val) {
+                    if(!currNode.right) {
+                        currNode.right = newNode
+                        return this
+                    } else {
+                        currNode = currNode.right
+                    }
+                }
+            }
+            currNode = newNode
+        }
+        return this
     }
 }
 
 const tree = new BinarySearchTree()
+tree.insert(7)
+tree.insert(5)
+tree.insert(15)
+tree.insert(4)
+/* Result:
+BinarySearchTree {
+  root: Node {
+    val: 7,
+    left: Node { val: 5, left: [Node], right: null },
+    right: Node { val: 15, left: null, right: null }
+  }
+} */
 
-// Example 1: Manual insert:
+/*
+// Manual insert example:
 tree.root = new Node(10)
 tree.root.right  = new Node(15)
 tree.root.left = new Node(7)
 tree.root.left.right = new Node(9)
-console.log(tree)
 /* result:
 BinarySearchTree {
   roott: null,
