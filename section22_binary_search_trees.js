@@ -50,19 +50,21 @@ class BinarySearchTree {
         } else {
             let currNode = this.root
             while(true) {
-                if (newNode.val < currNode.val) {
+                if (newNode.val === currNode.val) {
+                    return undefined // Edge case: val already in tree (We can also add feq counter and increment)
+                } else if (newNode.val < currNode.val) {
                     if(!currNode.left) {
-                        currNode.left = newNode
+                        currNode.left = newNode // insert leaf on left
                         return this
                     } else {
-                        currNode = currNode.left
+                        currNode = currNode.left // Move to left child
                     }
                 } else if (newNode.val > currNode.val) {
                     if(!currNode.right) {
-                        currNode.right = newNode
+                        currNode.right = newNode // insert leaf on right
                         return this
                     } else {
-                        currNode = currNode.right
+                        currNode = currNode.right // Move to right child
                     }
                 }
             }
@@ -77,6 +79,7 @@ tree.insert(7)
 tree.insert(5)
 tree.insert(15)
 tree.insert(4)
+tree.insert(4) // undefined (duplicate)
 /* Result:
 BinarySearchTree {
   root: Node {
