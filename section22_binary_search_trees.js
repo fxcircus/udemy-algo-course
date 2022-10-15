@@ -72,6 +72,22 @@ class BinarySearchTree {
         }
         return this
     }
+    find (val) {
+        if(!this.root) return  false // Edge case 1: empty tree
+        if(val === this.root.val) return this.root // Edge case 2: val is also the root of tree
+        let currNode = this.root
+        let found = false
+        while(!found && currNode) {
+            if(val === currNode.val) {
+                found = true
+            } else if(val  < currNode.val) {
+                currNode = currNode.left
+            } else {
+                currNode = currNode.right
+            }
+        }
+        return found ? currNode : false
+    }
 }
 
 const tree = new BinarySearchTree()
@@ -88,9 +104,12 @@ BinarySearchTree {
     right: Node { val: 15, left: null, right: null }
   }
 } */
+console.log(tree.find(7))
+
 
 /*
 // Manual insert example:
+// ======================
 tree.root = new Node(10)
 tree.root.right  = new Node(15)
 tree.root.left = new Node(7)
