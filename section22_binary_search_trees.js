@@ -26,10 +26,8 @@ ____5____       ____12
 
 Big O time complexity:
 ======================
-Insertion   
-Removal     
-Searching   
-Access      
+Insertion   O(log n)
+Searching   O(log n)
 */
 class Node {
     constructor(val) {
