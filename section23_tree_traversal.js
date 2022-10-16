@@ -12,14 +12,13 @@ SDF is "vertical" \ different level each time... a
 
 Example:
 ========
-In order to find if 99 is in the tree below,
-We will need to travese the tree.
+We will travese the following binary tree:
 
     ________10_______
     |               |
-____19____          6____
+____6____          15____
 |       |               |
-99      8               20
+3      8               20
 
 ** We reuse the code from section22 binary search tree **
 */
@@ -94,6 +93,21 @@ class BinarySearchTree {
         }
         return data
     }
+    
+    // 2) DFS PreOrder(!!!)
+    // ====================
+    DFSPreOrder() {
+        const data = []
+        // HELPER FUNCTION - Recursive:
+        // ============================
+        const traverse = (n) => {
+            data.push(n.val)
+            if(n.left) traverse(n.left)
+            if(n.right) traverse(n.right)
+        }
+        traverse(this.root)
+        return data
+    }
 }
 
 const tree = new BinarySearchTree()
@@ -103,4 +117,5 @@ tree.insert(15)
 tree.insert(3)
 tree.insert(8)
 tree.insert(20)
-console.log(tree.BFS()) // [ 10, 6, 15, 3, 8, 20 ]
+// console.log(tree.BFS())      // [ 10, 6, 15, 3, 8, 20 ]
+console.log(tree.DFSPreOrder()) // [ 10, 6, 3, 8, 15, 20 ]
