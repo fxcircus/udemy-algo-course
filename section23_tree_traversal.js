@@ -4,9 +4,9 @@ Traversing a tree = visiting every node ONLY 1 time.
 There are many ways to do this, we will focus on 4:
 
 -   Breadth First Search (BFS)
--   Depth First PreOrder:   Node x -> ALL children on left -> ALL children on right
--   Depth First PostOrder:  ALL children of node (left first, then right) -> Node x 
--   Depth First InOrder:    
+-   Depth First PreOrder:   NodeX -> ALL children on left -> ALL children on right
+-   Depth First PostOrder:  ALL children of node (left first, then right) -> NodeX
+-   Depth First InOrder:    From nodeX, we go to last child on left, then that child's right -> nodeX
 
 BFS is "horizontal" \ on the same level ----->
 SDF is "vertical" \ different level each time... a
@@ -119,6 +119,16 @@ class BinarySearchTree {
         traverse(this.root)
         return data
     }
+    DFSInOrder() {
+        const data = []
+        const traverse = (n) => {
+            if(n.left) traverse(n.left)
+            data.push(n.val) // changed order again
+            if(n.right) traverse(n.right)
+        }
+        traverse(this.root)
+        return data
+    }
 }
 
 const tree = new BinarySearchTree()
@@ -128,6 +138,7 @@ tree.insert(15)
 tree.insert(3)
 tree.insert(8)
 tree.insert(20)
-// console.log(tree.BFS())          // [ 10, 6, 15, 3, 8, 20 ]
-// console.log(tree.DFSPreOrder())  // [ 10, 6, 3, 8, 15, 20 ]
+console.log(tree.BFS())          // [ 10, 6, 15, 3, 8, 20 ]
+console.log(tree.DFSPreOrder())  // [ 10, 6, 3, 8, 15, 20 ]
 console.log(tree.DFSPostOrder()) // [ 3, 8, 6, 20, 15, 10 ]
+console.log(tree.DFSInOrder())   // [ 3, 6, 8, 10, 15, 20 ]
