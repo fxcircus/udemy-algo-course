@@ -22,6 +22,12 @@ ____6____          15____
 3      8               20
 
 ** We reuse the code from section22 binary search tree **
+
+Big O - depends!:
+=================
+- BFS and DFS have the same time complexity because we search the entire tree each time
+- BFS can take more space if the tree is wide, meaning each child has children and there are a lot of edges
+- We can choose different DFS versions depending on the output and how we want to use it
 */
 class Node {
     constructor(val) {
