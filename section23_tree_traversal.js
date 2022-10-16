@@ -2,10 +2,11 @@
 ==================
 Traversing a tree = visiting every node ONLY 1 time.
 There are many ways to do this, we will focus on 4:
+
 -   Breadth First Search (BFS)
--   Depth First PreOrder
--   Depth First PostOrder
--   Depth First InOrder
+-   Depth First PreOrder:   Node x -> ALL children on left -> ALL children on right
+-   Depth First PostOrder:  ALL children of node (left first, then right) -> Node x 
+-   Depth First InOrder:    
 
 BFS is "horizontal" \ on the same level ----->
 SDF is "vertical" \ different level each time... a
@@ -79,8 +80,8 @@ class BinarySearchTree {
         }
         return found ? currNode : false
     }
-    // 1) BFS using array as queue:
-    // ===============================
+    // 1) BFS (using array as queue):
+    // ==============================
     BFS() {
         const q = [], data = []
         let currNode = this.root
@@ -94,16 +95,26 @@ class BinarySearchTree {
         return data
     }
     
-    // 2) DFS PreOrder(!!!)
-    // ====================
+    // 2) DFS
+    // ======
     DFSPreOrder() {
         const data = []
         // HELPER FUNCTION - Recursive:
         // ============================
         const traverse = (n) => {
-            data.push(n.val)
+            data.push(n.val) // push parent first then get children
             if(n.left) traverse(n.left)
             if(n.right) traverse(n.right)
+        }
+        traverse(this.root)
+        return data
+    }
+    DFSPostOrder() {
+        const data = []
+        const traverse = (n) => {
+            if(n.left) traverse(n.left)
+            if(n.right) traverse(n.right)
+            data.push(n.val) // changed order -> gets the children first and root last
         }
         traverse(this.root)
         return data
@@ -117,5 +128,6 @@ tree.insert(15)
 tree.insert(3)
 tree.insert(8)
 tree.insert(20)
-// console.log(tree.BFS())      // [ 10, 6, 15, 3, 8, 20 ]
-console.log(tree.DFSPreOrder()) // [ 10, 6, 3, 8, 15, 20 ]
+// console.log(tree.BFS())          // [ 10, 6, 15, 3, 8, 20 ]
+// console.log(tree.DFSPreOrder())  // [ 10, 6, 3, 8, 15, 20 ]
+console.log(tree.DFSPostOrder()) // [ 3, 8, 6, 20, 15, 10 ]
