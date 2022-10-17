@@ -10,7 +10,6 @@ A data structure that takes the form of a binary tree, but with 2 extra conditio
     
 Binary Heap are commonly used to implement a priority queue.
 
-
 formula for finding children \ parents (We use arrays to store a heaps):
 ========================================================================
 1) For any index of arr n:
@@ -28,3 +27,28 @@ ____39____      ____33
 |         |    |
 18      27     12
 */
+
+class MaxBinaryHeap {
+    constructor() {
+        this.values = []
+    }
+    // Insert: add new element to heap
+    insert(element) {
+        this.values.push(element)
+        this.bubbleUp(element)
+    }
+    // Helper function: bubble values to correct idx:
+    bubbleUp(el){
+        let idx = this.values.length - 1
+        let parentIdx = Math.floor((idx - 1) / 2)
+        while(this.values[parentIdx] < el) {
+            const tmp = this.values[parentIdx]
+            this.values[parentIdx] = el
+            el = tmp
+            parentIdx = Math.floor((parentIdx - 1) / 2)
+        }
+    }
+}
+
+// Heap  -> [41, 39, 33, 18, 27, 12]
+// Index ->   0   1   2   3   4   5
