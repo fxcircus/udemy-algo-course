@@ -35,20 +35,33 @@ class MaxBinaryHeap {
     // Insert: add new element to heap
     insert(element) {
         this.values.push(element)
-        this.bubbleUp(element)
+        this.bubbleUp()
     }
     // Helper function: bubble values to correct idx:
-    bubbleUp(el){
+    bubbleUp(){
         let idx = this.values.length - 1
-        let parentIdx = Math.floor((idx - 1) / 2)
-        while(this.values[parentIdx] < el) {
-            const tmp = this.values[parentIdx]
+        const el = this.values[idx]
+        while(idx > 0) {
+            let parentIdx = Math.floor((idx - 1) / 2)
+            const parent = this.values[parentIdx]
+            if (el <= parent) break 
             this.values[parentIdx] = el
-            el = tmp
-            parentIdx = Math.floor((parentIdx - 1) / 2)
+            this.values[idx] = parent
+            idx = parentIdx
         }
     }
 }
 
 // Heap  -> [41, 39, 33, 18, 27, 12]
 // Index ->   0   1   2   3   4   5
+
+let heap = new MaxBinaryHeap()
+heap.insert(41)
+heap.insert(39)
+heap.insert(33)
+heap.insert(18)
+heap.insert(27)
+heap.insert(12)
+heap.insert(55)
+console.log(heap)
+/* MaxBinaryHeap { values: [ 55, 39, 41, 18, 27, 12, 33 ] } */
