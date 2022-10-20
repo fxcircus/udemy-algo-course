@@ -50,6 +50,16 @@ class MaxBinaryHeap {
             idx = parentIdx
         }
     }
+    extractMax() {
+        // Edge case - fix later
+        const max = this.values[0]
+        const end = this.values.pop()
+        if(this.values > 0) {
+            // finish later
+        }
+        this.values[0] = end
+        
+    }
 }
 
 // Heap  -> [41, 39, 33, 18, 27, 12]
