@@ -62,6 +62,17 @@ class MaxBinaryHeap {
     }
 }
 
+class PriorityQueue {
+    constructor(){
+        this.values = []
+    }
+    enqueue(val, priority){
+        let newNode = new Node(val, priority)
+        this.values.push(newNode)
+        this.bubbleUp()
+    }
+}
+
 // Heap  -> [41, 39, 33, 18, 27, 12]
 // Index ->   0   1   2   3   4   5
 
