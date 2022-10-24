@@ -52,9 +52,34 @@ class MaxBinaryHeap {
             idx = parentIdx
         }
     }
+    /* Extract method:
+    1. replace value of root with value of last node in heap
+    2. pop last node
+    3. "sinking down" - swap new root with largest el until reaching end of heap 
+    */
     extractMax() {
-        
-        
+        this.values[0] = this.values[this.values.length - 1]
+        const res = this.values.pop()
+        this.sinkDown()
+        return res
+    }
+    sinkDown() {
+        let parentIdx = 0
+        let parent = this.values[0]
+        while(parentIdx < (this.values.length - 1)) {
+            const leftChildIdx = parentIdx * 2 + 1
+            const rightChildIdx = parentIdx * 2 + 2
+            const leftChild = this.values[leftChildIdx]
+            const rightChild = this.values[rightChildIdx]
+            const largestIdx = leftChild >= rightChild ? leftChildIdx : rightChildIdx
+            const largest = this.values[largestIdx]
+            console.log(`parentIdx: ${parentIdx}\tparent: ${parent}\tleftChild: ${leftChild}\trightChild: ${rightChild}\tlargest${largest}`)
+            if (parent > largest) break
+            const tmp = largest
+            this.values[largestIdx] = parent
+            this.values[parentIdx] = tmp
+            parentIdx = largestIdx
+        }
     }
 }
 
@@ -80,5 +105,6 @@ heap.insert(18)
 heap.insert(27)
 heap.insert(12)
 heap.insert(55)
-console.log(heap)
-/* MaxBinaryHeap { values: [ 55, 39, 41, 18, 27, 12, 33 ] } */
+// console.log(heap) /* MaxBinaryHeap { values: [ 55, 39, 41, 18, 27, 12, 40 ] } */
+
+console.log(heap.extractMax())
