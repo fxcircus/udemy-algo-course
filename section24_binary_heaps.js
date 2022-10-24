@@ -39,39 +39,35 @@ class MaxBinaryHeap {
     }
     // Helper function: bubble values to correct idx:
     bubbleUp(){
-        let idx = this.values.length - 1
-        const el = this.values[idx]
+        // Example: after pushing 41 39 and 40, array is- [41, 39, 40]
+        let idx = this.values.length - 1                // idx = 2
+        const el = this.values[idx]                     // el = 40
         while(idx > 0) {
-            let parentIdx = Math.floor((idx - 1) / 2)
-            const parent = this.values[parentIdx]
-            if (el <= parent) break 
+            let parentIdx = Math.floor((idx - 1) / 2)   // parentIdx = 0
+            const parent = this.values[parentIdx]       // parent = 41
+            // End loop, or else swap values:
+            if (el <= parent) break                     // break!
             this.values[parentIdx] = el
             this.values[idx] = parent
             idx = parentIdx
         }
     }
     extractMax() {
-        // Edge case - fix later
-        const max = this.values[0]
-        const end = this.values.pop()
-        if(this.values > 0) {
-            // finish later
-        }
-        this.values[0] = end
+        
         
     }
 }
 
-class PriorityQueue {
-    constructor(){
-        this.values = []
-    }
-    enqueue(val, priority){
-        let newNode = new Node(val, priority)
-        this.values.push(newNode)
-        this.bubbleUp()
-    }
-}
+// class PriorityQueue {
+//     constructor(){
+//         this.values = []
+//     }
+//     enqueue(val, priority){
+//         let newNode = new Node(val, priority)
+//         this.values.push(newNode)
+//         this.bubbleUp()
+//     }
+// }
 
 // Heap  -> [41, 39, 33, 18, 27, 12]
 // Index ->   0   1   2   3   4   5
@@ -79,7 +75,7 @@ class PriorityQueue {
 let heap = new MaxBinaryHeap()
 heap.insert(41)
 heap.insert(39)
-heap.insert(33)
+heap.insert(40)
 heap.insert(18)
 heap.insert(27)
 heap.insert(12)
