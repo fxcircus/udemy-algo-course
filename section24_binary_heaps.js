@@ -60,9 +60,12 @@ class MaxBinaryHeap {
     extractMax() {
         const max = this.values[0]
         const end = this.values.pop()
-        this.values[0] = end
-        this.sinkDown()
-        return end
+        // Edge case: only 1 element, nothing to sync
+        if(this.values.length > 0) {
+            this.values[0] = end
+            this.sinkDown()
+        }
+        return max
     }
     sinkDown() {
         let idx = 0
@@ -87,11 +90,10 @@ class MaxBinaryHeap {
 
             if (swap === null) break
             
-            
-            console.log(`idx: ${idx}\tel: ${el}\tleftChild: ${leftChild}\trightChild: ${rightChild}\tswap${swap}`)
             this.values[idx] = this.values[swap]
             this.values[swap] = el
             idx = swap
+            // console.log(`idx: ${idx}\tel: ${el}\tleftChild: ${leftChild}\trightChild: ${rightChild}\tswap${swap}`)
         }
     }
 }
@@ -120,5 +122,10 @@ heap.insert(12)
 heap.insert(55)
 console.log(heap) /* MaxBinaryHeap { values: [ 55, 39, 41, 18, 27, 12, 33 ] } */
 
-console.log(heap.extractMax())
-console.log(heap) // [ 41, 39, 33, 18, 27, 12 ]
+heap.extractMax() // [ 41, 39, 33, 18, 27, 12 ]
+heap.extractMax() // [ 39, 18, 33, 12, 27 ]
+heap.extractMax() // [ 33, 18, 27, 12 ]
+heap.extractMax() // [ 18, 12, 27 ]
+heap.extractMax() // [ 27, 12 ]
+heap.extractMax() // [ 12 ]
+heap.extractMax() // [  ]
