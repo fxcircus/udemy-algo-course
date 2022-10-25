@@ -58,27 +58,40 @@ class MaxBinaryHeap {
     3. "sinking down" - swap new root with largest el until reaching end of heap 
     */
     extractMax() {
-        this.values[0] = this.values[this.values.length - 1]
-        const res = this.values.pop()
+        const max = this.values[0]
+        const end = this.values.pop()
+        this.values[0] = end
         this.sinkDown()
-        return res
+        return end
     }
     sinkDown() {
-        let parentIdx = 0
-        let parent = this.values[0]
-        while(parentIdx < (this.values.length - 1)) {
-            const leftChildIdx = parentIdx * 2 + 1
-            const rightChildIdx = parentIdx * 2 + 2
-            const leftChild = this.values[leftChildIdx]
-            const rightChild = this.values[rightChildIdx]
-            const largestIdx = leftChild >= rightChild ? leftChildIdx : rightChildIdx
-            const largest = this.values[largestIdx]
-            console.log(`parentIdx: ${parentIdx}\tparent: ${parent}\tleftChild: ${leftChild}\trightChild: ${rightChild}\tlargest${largest}`)
-            if (parent > largest) break
-            const tmp = largest
-            this.values[largestIdx] = parent
-            this.values[parentIdx] = tmp
-            parentIdx = largestIdx
+        let idx = 0
+        let el = this.values[0]
+        const length = this.values.length - 1
+        while(true) {
+            const leftChildIdx = idx * 2 + 1
+            const rightChildIdx = idx * 2 + 2
+            let leftChild, rightChild
+            let swap = null
+
+            if(leftChildIdx < length) {
+                leftChild = this.values[leftChildIdx]
+                if(leftChild > el) swap = leftChildIdx
+            }
+            if(rightChildIdx < length) {
+                rightChild = this.values[rightChildIdx]
+                if( (swap === null && rightChild > el) || (swap !== null && rightChild > leftChild)) {
+                    swap = rightChildIdx
+                }
+            }
+
+            if (swap === null) break
+            
+            
+            console.log(`idx: ${idx}\tel: ${el}\tleftChild: ${leftChild}\trightChild: ${rightChild}\tswap${swap}`)
+            this.values[idx] = this.values[swap]
+            this.values[swap] = el
+            idx = swap
         }
     }
 }
@@ -100,11 +113,12 @@ class MaxBinaryHeap {
 let heap = new MaxBinaryHeap()
 heap.insert(41)
 heap.insert(39)
-heap.insert(40)
+heap.insert(33)
 heap.insert(18)
 heap.insert(27)
 heap.insert(12)
 heap.insert(55)
-// console.log(heap) /* MaxBinaryHeap { values: [ 55, 39, 41, 18, 27, 12, 40 ] } */
+console.log(heap) /* MaxBinaryHeap { values: [ 55, 39, 41, 18, 27, 12, 33 ] } */
 
 console.log(heap.extractMax())
+console.log(heap) // [ 41, 39, 33, 18, 27, 12 ]
