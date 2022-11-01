@@ -2,12 +2,18 @@
 ================
 A data structure where each element has a priority.
 Elements with higher priorities are served before elements with lower priorities
-We implement using a heap because the big O for insertion and removal is O(log n)
+We implement using a heap because of the bigO time complexity.
     
 Example use case: operating systems have a "nice" property, that ranks their priority level.
 
 Nodes are sorted based on priority property
 lowest priorirty goes to the root
+
+Big O time complexity:
+======================
+Insertion   O(log N)
+Removal     O(log N)
+Searching   O(N)
 */
 
 class Node {
