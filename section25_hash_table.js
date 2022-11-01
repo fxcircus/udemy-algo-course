@@ -28,25 +28,43 @@ Removal
 Searching   
 */
 
-// Basic Hash function that only works on strings (NOT constant time):
-const hash = (key, arrLen) => {
-    let total = 0
-    for(let char of key) {
-        let val = char.charCodeAt(0) - 96 // "a" = 1, "b" = 2 etc'... for each character in passed value
-        total = (total + val) % arrLen
+class HashTable {
+    constructor(size = 17) {
+        this.keyMap = new Array(size)
     }
-    console.log(total)
-    return total // returned value is between 0 and arrLen
+    // Hash method - expects strings up to 100 chars
+    _hash(key) {
+      let total = 0
+      let PRIME_NUMBER = 31 // prime numbers reduce collisions
+      for (let i = 0; i < Math.min(key.length, 100); i++) {
+        let char = key[i]
+        let val = char.charCodeAt(0) - 96 // "a" = 1, "b" = 2 etc'... for each character in passed value
+        total = (total * PRIME_NUMBER + val) % this.keyMap.length
+      }
+      return total // returned value is between 0 and keyMap.length
+    }
+    // Set method - add key:value pair to table
+    set(key, value) {
+      const idx = this._hash(key)
+      // Edge case: init empty array in idx pos if not in use yet-
+      if (!this.keyMap[idx]) this.keyMap[idx] = [] 
+      this.keyMap[idx].push([key, value])
+    }
+    // Get method - retrieve values by key from table
+    get(key) {
+      const idx = this._hash(key)
+      if (this.keyMap[idx]) {
+        // Iterate over array in pos:
+        for(let i = 0; i < this.keyMap[idx].length; i++) {
+          if (this.keyMap[idx][i][0] === key) {
+            return this.keyMap[idx][i]
+          }
+        }
+      }
+      return undefined
+    }
 }
 
-hash("pink", 10)    // 0
-hash("purple", 10)  // 8
-
-
-// class HashTable {
-//     constructor() {
-        
-//     }
-    
-// }
-// let hashTable = new HashTable()
+let ht = new HashTable()
+ht.set("first", "hello world")
+console.log(ht.get("first")) // [ 'first', 'hello world' ]
