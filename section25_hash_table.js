@@ -63,21 +63,38 @@ class HashTable {
       }
       return undefined
     }
+    // keys - returns array of all keys in the table
     keys(){
       let keysArr = []
       for(let i = 0; i < this.keyMap.length; i++){
         if(this.keyMap[i]){
           for(let j = 0; j < this.keyMap[i].length; j++){
-            if(!keysArr.includes(this.keyMap[i][j][0])){
-              keysArr.push(this.keyMap[i][j][0])
-            }
+            const currKey = this.keyMap[i][j][0]
+            if(!keysArr.includes(currKey)) keysArr.push(currKey) // only push unique keys
           }
         }
       }
       return keysArr
     }
+    // values - returns array of all values in the table
+    // (We normally want to only return unique values)
+    values() {
+      let valArr = []
+      for(let i = 0; i < this.keyMap.length; i++) {
+        if(this.keyMap[i]){
+          for(let j = 0; j < this.keyMap[i].length; j++) {
+            const currVal = this.keyMap[i][j][1]
+            if(!valArr.includes(currVal)) valArr.push(currVal) // only push unique values
+          }
+        }
+      }
+      return valArr
+    }
 }
 
 let ht = new HashTable()
 ht.set("first", "hello world")
-console.log(ht.get("first")) // [ 'first', 'hello world' ]
+ht.set("second", "Not bad how are you?")
+ht.get("first") // [ 'first', 'hello world' ]
+ht.keys() // [ 'second', 'first' ]
+ht.values() // [ 'Not bad how are you?', 'hello world' ]
