@@ -23,9 +23,9 @@
 
 Big O time complexity:
 ======================
-Insertion   
-Removal     
-Searching   
+Insertion   O(1)
+Deletion    O(1)
+Access      O(1)
 */
 
 class HashTable {
